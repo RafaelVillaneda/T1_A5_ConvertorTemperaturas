@@ -93,6 +93,7 @@ class InterfazConversor extends JFrame implements ActionListener{
 			}
 		}
 		if(e.getSource()==cajaGrados) {
+			if(!cajaGrados.getText().equals("")) {
 			if(!(cobogradosOriginales.getSelectedItem().equals("Elige opcion...") || 
 					comboConvertir.getSelectedItem().equals("Elige opcion...") )) {
 				if(cobogradosOriginales.getSelectedItem().equals("Centigrados") && 
@@ -168,6 +169,7 @@ class InterfazConversor extends JFrame implements ActionListener{
 					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
 				}
 				
+			}
 			}
 		}//Caja
 		
