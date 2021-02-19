@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -68,10 +69,12 @@ class InterfazConversor extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		DecimalFormat df = new DecimalFormat("##.00");
 		String gradossinC[]= {"Fahrenheit","Kelvin","Rankine"};
 		String gradossinF[]= {"Centigrados","Kelvin","Rankine"};
 		String gradossinK[]= {"Centigrados","Fahrenheit","Rankine"};
 		String gradossinR[]= {"Centigrados","Fahrenheit","Kelvin"};
+		Convertor convertor=new Convertor();
 		if(e.getSource() == cobogradosOriginales) {
 			comboConvertir.removeAllItems();
 			if(cobogradosOriginales.getSelectedItem().equals("Centigrados")) {
@@ -91,16 +94,56 @@ class InterfazConversor extends JFrame implements ActionListener{
 		if(e.getSource()==cajaGrados) {
 			if(!(cobogradosOriginales.getSelectedItem().equals("Elige opcion...") || 
 					comboConvertir.getSelectedItem().equals("Elige opcion...") )) {
-			System.out.println(":00000");	
+				if(cobogradosOriginales.getSelectedItem().equals("Centigrados") && 
+						comboConvertir.getSelectedItem().equals("Fahrenheit")){
+					double gradosC=Double.parseDouble(cajaGrados.getText());
+					//System.out.println(gradosC);
+					cajaConvertido.setText(String.valueOf(convertor.caF(gradosC)));
+				}else if(cobogradosOriginales.getSelectedItem().equals("Centigrados") &&
+						comboConvertir.getSelectedItem().equals("Kelvin")){
+					double gradosC=Double.parseDouble(cajaGrados.getText());
+					cajaConvertido.setText(String.valueOf(convertor.caK(gradosC))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Centigrados") &&
+						comboConvertir.getSelectedItem().equals("Rankine")){
+					double gradosC=Double.parseDouble(cajaGrados.getText());
+					cajaConvertido.setText(String.valueOf(df.format(convertor.caR(gradosC)))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Fahrenheit") &&
+						comboConvertir.getSelectedItem().equals("Centigrados")){
+					double gradosC=Double.parseDouble(cajaGrados.getText());
+					gradosC=convertor.FaC(gradosC);
+					cajaConvertido.setText(String.valueOf(df.format(gradosC))+"°");
+				}
 			}
-		}
+		}//Caja
 		
 		
-		}
+		}//Eventos
 	}//Class
 	
 
-
+class Convertor{
+	
+	public double FaC(double gradosF) {
+		return (gradosF-32)/1.8000;
+	}
+	public double KaC(double gradosk) {
+		return gradosk-273.15;
+	}
+	public double RaC(double gradosR) {
+		return (gradosR-491.67)/1.8000;
+	}
+	
+	public double caF(double gradosC) {
+		return gradosC*1.800+32;
+	}
+	public double caK(double gradosC) {
+		return gradosC+273.15;
+	}
+	public double caR(double gradosC) {
+		return gradosC*1.800+491.67;
+	}
+	
+}
 public class Pruebas {
 
 	public static void main(String[] args) {
