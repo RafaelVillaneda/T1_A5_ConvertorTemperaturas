@@ -42,6 +42,7 @@ class InterfazConversor extends JFrame implements ActionListener{
                 }
             }
         });
+		cajaGrados.setToolTipText("Presiona enter para convertir despues de elegir las unidades:)");
 		cajaGrados.addActionListener(this);
 		llenado(GridBagConstraints.HORIZONTAL, 3, 0, 1, 1, cajaGrados);
 		cobogradosOriginales=new JComboBox<String>(grados);
@@ -148,17 +149,23 @@ class InterfazConversor extends JFrame implements ActionListener{
 				else if(cobogradosOriginales.getSelectedItem().equals("Rankine") &&
 						comboConvertir.getSelectedItem().equals("Centigrados")){
 					double grados=Double.parseDouble(cajaGrados.getText());
-					grados=convertor.KaC(grados);
+					grados=convertor.RaC(grados);
 					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
 					//-----------------------------------------------------------------
 				}
 				else if(cobogradosOriginales.getSelectedItem().equals("Rankine") &&
 						comboConvertir.getSelectedItem().equals("Fahrenheit")){
 					double grados=Double.parseDouble(cajaGrados.getText());
-					grados=convertor.KaC(grados);
+					grados=convertor.RaC(grados);
 					grados=convertor.caF(grados);
 					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
-					//-----------------------------------------------------------------
+				}
+				else if(cobogradosOriginales.getSelectedItem().equals("Rankine") &&
+						comboConvertir.getSelectedItem().equals("Kelvin")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.RaC(grados);
+					grados=convertor.caK(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
 				}
 				
 			}
