@@ -30,7 +30,7 @@ class InterfazConversor extends JFrame implements ActionListener{
 		JLabel label1=new JLabel("Convertir: ");
 		llenado(GridBagConstraints.HORIZONTAL, 0, 0, 1, 2, label1);
 		cajaGrados=new JTextField(10);
-		
+		cajaGrados.setText("0");
 		cajaGrados.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
                 String value = cajaGrados.getText();
@@ -107,12 +107,60 @@ class InterfazConversor extends JFrame implements ActionListener{
 						comboConvertir.getSelectedItem().equals("Rankine")){
 					double gradosC=Double.parseDouble(cajaGrados.getText());
 					cajaConvertido.setText(String.valueOf(df.format(convertor.caR(gradosC)))+"°");
+					//-----------------------------------------------------------------------------------------
 				}else if(cobogradosOriginales.getSelectedItem().equals("Fahrenheit") &&
 						comboConvertir.getSelectedItem().equals("Centigrados")){
 					double gradosC=Double.parseDouble(cajaGrados.getText());
 					gradosC=convertor.FaC(gradosC);
 					cajaConvertido.setText(String.valueOf(df.format(gradosC))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Fahrenheit") &&
+						comboConvertir.getSelectedItem().equals("Kelvin")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.FaC(grados);
+					grados=convertor.caK(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Fahrenheit") &&
+						comboConvertir.getSelectedItem().equals("Rankine")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.FaC(grados);
+					grados=convertor.caR(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+					//-----------------------------------------------------------------------------------------
+				}else if(cobogradosOriginales.getSelectedItem().equals("Kelvin") &&
+						comboConvertir.getSelectedItem().equals("Centigrados")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.KaC(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Kelvin") &&
+						comboConvertir.getSelectedItem().equals("Fahrenheit")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.KaC(grados);
+					grados=convertor.caF(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+				}else if(cobogradosOriginales.getSelectedItem().equals("Kelvin") &&
+						comboConvertir.getSelectedItem().equals("Rankine")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.KaC(grados);
+					grados=convertor.caR(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+					//-----------------------------------------------------------------
 				}
+				else if(cobogradosOriginales.getSelectedItem().equals("Rankine") &&
+						comboConvertir.getSelectedItem().equals("Centigrados")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.KaC(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+					//-----------------------------------------------------------------
+				}
+				else if(cobogradosOriginales.getSelectedItem().equals("Rankine") &&
+						comboConvertir.getSelectedItem().equals("Fahrenheit")){
+					double grados=Double.parseDouble(cajaGrados.getText());
+					grados=convertor.KaC(grados);
+					grados=convertor.caF(grados);
+					cajaConvertido.setText(String.valueOf(df.format(grados))+"°");
+					//-----------------------------------------------------------------
+				}
+				
 			}
 		}//Caja
 		
